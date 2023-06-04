@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public partial class PlayerStateManager : MonoBehaviour
 {
    public  bool isSprinting;
-
+    public bool isFalling; 
 
     private void Awake()
     {
@@ -20,7 +20,17 @@ public partial class PlayerStateManager : MonoBehaviour
         Input.actions["Speed"].canceled += OnSprintCanceled;
 
     }
-    void Start()
+  
+    public Vector3 Gravity
+    {
+        get => _gravityVector;
+        set
+        {
+
+            _gravityVector = value;
+        }
+    }
+            void Start()
     {
         CurrentState = IdlingState;
         CurrentState.EnterState(this);
@@ -33,6 +43,7 @@ public partial class PlayerStateManager : MonoBehaviour
             CurrentState != FallingState && 
             !Controller.isGrounded)
         {
+             
             SwitchState(FallingState);
         }
         CurrentState.UpdateState(this);
@@ -68,26 +79,15 @@ public partial class PlayerStateManager : MonoBehaviour
     }
     #endregion
 
-    private void OnSprintPerformed(InputAction.CallbackContext context)
+    public void OnSprintPerformed(InputAction.CallbackContext context)
     {
         isSprinting = true;
-        if (Controller.isGrounded && CurrentState == WalkingState)
-        {
-            
-            SwitchState(RunningState);
-        }
-       /* if(CurrentState!=WalkingState)
-        {
-            SwitchState(IdlingState);
-        }
-        */
        
-        
     }
 
     private void OnSprintCanceled(InputAction.CallbackContext context)
     {
         isSprinting = false;
-        SwitchState(IdlingState);
+       
     }
 }

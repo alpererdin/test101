@@ -9,6 +9,7 @@ public class WalkState : PlayerBaseState
         player._Animator.SetBool("isWalking",true);
        // player._Animator.Play("Walking");
         Debug.Log("+enter walk state");
+       
     }
 
 
@@ -30,9 +31,9 @@ public class WalkState : PlayerBaseState
         {
             player.Move();
         }
-        if(player.isSprinting )
+        if(player.isSprinting)
         {
-            player.SwitchState(player.RunningState);
+           player.SwitchState(player.RunningState);
         }
 
     }

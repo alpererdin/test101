@@ -20,8 +20,11 @@ public partial class PlayerStateManager
     }
     private void OnSpeed(InputValue value)
     {
-        /*if (CurrentState != JumpingState && CurrentState != FallingState)
-            SwitchState(RunningState);*/
+        if (CurrentState != JumpingState && CurrentState != FallingState)
+            if (CurrentState == WalkingState)
+            SwitchState(RunningState);
+
+
     }
 }
 

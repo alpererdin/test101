@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class JumpState : PlayerBaseState
 {
-    private float force = .1f;
-    private int maxForce = 12;
+    private float force = .01f;
+    private int maxForce = 5;
     public override void EnterState(PlayerStateManager player)
     {
+        
+
         player._Animator.Play("Jumping");
         Debug.Log("+enter Jump state");
+        player.Gravity = new Vector3(0, -4, 0);
     }
 
 
@@ -18,7 +21,7 @@ public class JumpState : PlayerBaseState
         Debug.Log("-exit Jump state");
         player.MoveVector.y = 0;
     }
-
+    ///animator
 
     public override void UpdateState(PlayerStateManager player)
     {
@@ -26,6 +29,7 @@ public class JumpState : PlayerBaseState
 
         if(player.MoveVector.y >= maxForce)
         {
+            player.Gravity = new Vector3(0, -9.81f, 0);
             player.SwitchState(player.FallingState);
         }
 

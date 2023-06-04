@@ -6,8 +6,9 @@ public class RunState : PlayerBaseState
 {
     public override void EnterState(PlayerStateManager player)
     {
-        player._Animator.SetBool("isRunning", true);
 
+        //player._Animator.SetBool("isRunning", true);
+          
         player._Animator.Play("Running");
         Debug.Log("+enter Run state");
     }
@@ -15,7 +16,7 @@ public class RunState : PlayerBaseState
 
     public override void ExitState(PlayerStateManager player)
     {
-        player._Animator.SetBool("isRunning", false);
+       // player._Animator.SetBool("isRunning", false);
 
         Debug.Log("-exit Run state");
     }
@@ -27,7 +28,12 @@ public class RunState : PlayerBaseState
         {
             player.SwitchState(player.IdlingState);
         }
-        player.Move(10f);
+        else
+        {
+            player.Move(10f);
+        }
+
+       
 
 
     }
